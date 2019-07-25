@@ -1,0 +1,15 @@
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+
+RUN npm install
+
+# more as a 'reminder' on how to build the image
+# as volumes gets mapped during runtime, basically making this copy redundant
+# docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app <image-id>
+# or via docker-compose via volumes construct in this dir
+COPY . .
+
+CMD ["npm", "run", "start"]
